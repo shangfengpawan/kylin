@@ -43,7 +43,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.calcite.avatica</groupId>
-            <artifactId>avatica</artifactId>
+            <artifactId>avatica-core</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -66,13 +66,6 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <artifactSet>
-                                <!-- jackson is already packaged into calcite-avatica.jar. To avoid including jackson
-                                twice, we include calcite-avatica which has jackson and exclude jackson. -->
-                                <excludes>
-                                    <exclude>com.fasterxml.jackson.core:*</exclude>
-                                </excludes>
-                            </artifactSet>
                             <relocations>
                                 <relocation>
                                     <pattern>org.apache.calcite</pattern>
@@ -89,6 +82,10 @@
                                 <relocation>
                                     <pattern>org.apache.commons</pattern>
                                     <shadedPattern>${shadeBase}.org.apache.commons</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.protobuf</pattern>
+                                    <shadedPattern>${shadeBase}.com.google.protobuf</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
